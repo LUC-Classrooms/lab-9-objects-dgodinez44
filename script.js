@@ -11,12 +11,17 @@ function setup() {
   hint: use the "new" keyword with the constructor function MyClass()
   assign the result of this function to myObj1 and then to myObj2
   */
+ myObj1 = new MyClass(300, 100);
+ myObj2 = new MyClass(400, 200);
 }
 
 function draw() {
   background(200);
   // add code here to make your objects move and display on canvas
-  
+  myObj1.move();
+  myObj1.display();
+  myObj2.move();
+  myObj2.display();
 }
 
 //Class constructor:
@@ -36,7 +41,14 @@ function MyClass(tempX, tempY){
     this.y += this.ySpeed;
     
     //maybe add some code to keep it on the canvas ...
+    // Stops the circles from bouncing off the canvas
+    if (this.x < 0 || this.x > width) {
+      this.xSpeed *= -1;
+    }
+    if (this.y < 0 || this.y > height) {
+      this.ySpeed *= -1;
   }
+}
   
   this.display = function (){
     
@@ -46,7 +58,10 @@ function MyClass(tempX, tempY){
     ellipse(0, 0, this.d/2, this.d);
     // note that when you want to use the objects properties, you need to use "this"
     // add more drawing code to make your image a little more complex
-
+    fill("red");
+    rect(-20, -20, 40, 40);
+    fill("yellow");
+    triangle(-20, 20, 20, 20, 0, -20);
     pop(); // delete the tansparency layer after drawing the image
   }
 }
